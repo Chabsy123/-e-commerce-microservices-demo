@@ -1,4 +1,4 @@
-﻿namespace eComm.SharedLib.Response
+﻿namespace eComm.SharedLib.Responses
 {
     public class Response(bool Flag = false, string Message = null!);
     
