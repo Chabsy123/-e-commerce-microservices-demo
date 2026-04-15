@@ -10,7 +10,7 @@ namespace eComm.SharedLib.Middleware
     {
         public async Task InvokeAsync(HttpContext context)
         {
-            //Declare variables
+            //Declare default variables
             string message = "Internal server error. Please try again";
             int statusCode = (int)HttpStatusCode.InternalServerError;
             string title = "An error occurred while processing your request.";
@@ -54,6 +54,8 @@ namespace eComm.SharedLib.Middleware
                     title = "Request Timeout";
                     message = "The request timed out. Try again later.";
                     statusCode = StatusCodes.Status408RequestTimeout;
+                    // If Exception is Caught. 
+                    // If none of the exceptions then do the default.
                     await ModifyHeader(context, title, message, statusCode);
                 }
             }
