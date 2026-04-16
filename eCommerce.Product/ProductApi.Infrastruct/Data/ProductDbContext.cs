@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using ProductApi.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace ProductApi.Infrastruct.Data
 {
-    internal class ProductDbContext
+    public class ProductDbContext(DbContextOptions<ProductDbContext> options) : DbContext(options)
     {
+        public DbSet<Product> Products { get; set; }
     }
 }
