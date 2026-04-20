@@ -39,6 +39,8 @@ namespace OrderApi.Application.DTOs.Conversions
 
                 return (null, _orders);
             }
+            // neither provided
+            return (null, null);
         }
     }
 }

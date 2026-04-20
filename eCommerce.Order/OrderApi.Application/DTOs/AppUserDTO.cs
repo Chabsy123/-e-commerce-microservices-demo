@@ -11,6 +11,8 @@ namespace OrderApi.Application.DTOs
         [Required] string Password,
         [Required] string Role
 
-     );
-    
+     )
+    {
+        public int Id { get; internal set; }
+    }
 }
