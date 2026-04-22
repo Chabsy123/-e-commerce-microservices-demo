@@ -5,6 +5,7 @@ using OrderApi.Application.DTOs;
 using OrderApi.Application.DTOs.Conversions;
 using OrderApi.Application.Interfaces;
 using OrderApi.Application.Services;
+using Response = eCommerce.SharedLibrary.Responses.Response;
 
 namespace OrderApi.Presentation.Controllers
 {
@@ -72,17 +73,30 @@ namespace OrderApi.Presentation.Controllers
         [HttpPut]
         public async Task<ActionResult<Response>> UpdateOrder(OrderDTO orderDTO)
         {
-            //Convert from dto to entity
-            var order = OrderConversion.ToEntity(orderDTO);
-            var response = await orderInterface.UpdateAsync(order);
-            return response.Flag ? Ok(response) : BadRequest(response);
+            // Use orderDTO.Id (Ensure your OrderDTO has the Id property!)
+            var existingOrder = await orderInterface.FindByIdAsync(orderDTO.Id);
+            if (existingOrder is null)
+                return NotFound(new Response(false, "Order not found in database."));
+
+            existingOrder.ProductId = orderDTO.ProductId;
+            existingOrder.ClientId = orderDTO.ClientId;
+            existingOrder.PurchaseQuantity = orderDTO.PurchaseQuantity;
+            existingOrder.OrderedDate = orderDTO.OrderedDate;
+
+            var response = await orderInterface.UpdateAsync(existingOrder);
+            return response.Flag ? Ok(response) : BadRequest(response); 
         }
 
-        [HttpDelete]
-        public async Task<ActionResult<Response>> DeleteOrder(OrderDTO orderDTO)
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<Response>> DeleteOrder(int id)
         {
-            //convert from dto to entity
-            var order = OrderConversion.ToEntity(orderDTO);
+            if (id <= 0)
+                return BadRequest("Invalid data provided.");
+
+            var order = await orderInterface.FindByIdAsync(id);
+            if (order is null)
+                return NotFound("Order not found.");
+
             var response = await orderInterface.DeleteAsync(order);
             return response.Flag ? Ok(response) : BadRequest(response);
         }
