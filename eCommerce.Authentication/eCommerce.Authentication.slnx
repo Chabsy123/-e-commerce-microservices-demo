@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="AuthenticationApi.Application/AuthenticationApi.Application.csproj" Id="39d11073-7829-4c54-ba24-097f31e67442" />
+  <Project Path="AuthenticationApi.Domain/AuthenticationApi.Domain.csproj" Id="d2c28f57-f20c-4324-b299-74ba019a1c7b" />
+  <Project Path="AuthenticationApi.Infrastructure/AuthenticationApi.Infrastructure.csproj" Id="4e61213a-a873-4563-967b-8a648ddce06e" />
+  <Project Path="AuthenticationApi.Presentation/AuthenticationApi.Presentation.csproj" Id="a58528d3-2323-4dc1-a1ee-1f5452496d81" />
+  <Project Path="C:/Users/HP/Desktop/Datalinks_Internship_Program/Software_Development/Backend/DotNET-CSharp/e-commerce-microservices-demo/eCommerce.SharedLibrary/eCommerce.SharedLibrary/eCommerce.SharedLibrary.csproj" />
+</Solution>
