@@ -30,7 +30,12 @@ namespace AuthenticationApi.Presentation.Controllers
         public async Task<ActionResult<GetUserDTO>> GetUser(int id)
         {
             if (id <= 0) return BadRequest("Invalid user Id");
+
             var user = await userInterface.GetUser(id);
+
+            // Check if user is null first!
+            if (user == null) return NotFound("User not found");
+
             return user.id > 0 ? Ok(user) : NotFound();
         }
     }

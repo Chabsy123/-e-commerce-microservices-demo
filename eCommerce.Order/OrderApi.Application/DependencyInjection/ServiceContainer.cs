@@ -16,11 +16,11 @@ namespace OrderApi.Application.DependencyInjection
             services.AddHttpClient<IOrderService, OrderService>(options =>
             {
                 options.BaseAddress = new Uri(config["ApiGateway:BaseAddress"]!);
-                options.Timeout = TimeSpan.FromSeconds(1);
+                options.Timeout = TimeSpan.FromSeconds(10);
 
             });
 
-            //Create retry strategY
+            //Create retry strategy
             var retryStrategy = new RetryStrategyOptions()
             {
                 ShouldHandle = new PredicateBuilder().Handle<TaskCanceledException>(),

@@ -3,7 +3,7 @@
 namespace OrderApi.Application.DTOs
 {
     public record AppUserDTO(
-        int id,
+        int Id,
         [Required] string Name,
         [Required] string TelephoneNumber,
         [Required] string Address,
@@ -11,8 +11,6 @@ namespace OrderApi.Application.DTOs
         [Required] string Password,
         [Required] string Role
 
-     )
-    {
-        public int Id { get; internal set; }
-    }
+     );
+    
 }

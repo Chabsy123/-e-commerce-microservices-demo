@@ -16,7 +16,7 @@ namespace ProductApi.Infrastruct.DependencyInjection
             //Add Database connectivity
             // Add Authentication scheme
 
-            SharedServiceContainer.AddSharedServices<ProductDbContext>(services, config, config["MySerilog:FineName"]);
+            SharedServiceContainer.AddSharedServices<ProductDbContext>(services, config, config["MySerilog:FileName"]!);
 
             //Create Dependency Injection
             services.AddScoped<IProduct, ProductRepository>();
