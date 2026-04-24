@@ -1,11 +1,11 @@
-﻿using eComm.SharedLib.Middleware;
+﻿using eCommerce.SharedLibrary.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog;
 
-namespace eComm.SharedLib.DependencyInjection
+namespace eCommerce.SharedLibrary.DependencyInjection
 {
     public static class SharedServiceContainer
     {
@@ -38,7 +38,7 @@ namespace eComm.SharedLib.DependencyInjection
             app.UseMiddleware<GlobalException>();
 
             // Register middleware to all outs
-            app.UseMiddleware<ListenToOnlyApiGateway>();
+            //app.UseMiddleware<ListenToOnlyApiGateway>();
 
 
             return app;

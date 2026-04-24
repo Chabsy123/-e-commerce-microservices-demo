@@ -95,7 +95,7 @@ namespace OrderApi.Presentation.Controllers
 
             var order = await orderInterface.FindByIdAsync(id);
             if (order is null)
-                return NotFound("Order not found.");
+                return NotFound(new Response(false, "Order not found."));
 
             var response = await orderInterface.DeleteAsync(order);
             return response.Flag ? Ok(response) : BadRequest(response);

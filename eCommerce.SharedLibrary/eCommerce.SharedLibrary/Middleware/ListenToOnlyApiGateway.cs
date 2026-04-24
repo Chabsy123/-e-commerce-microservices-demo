@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace eComm.SharedLib.Middleware
+namespace eCommerce.SharedLibrary.Middleware
 {
     public class ListenToOnlyApiGateway(RequestDelegate next)
     {

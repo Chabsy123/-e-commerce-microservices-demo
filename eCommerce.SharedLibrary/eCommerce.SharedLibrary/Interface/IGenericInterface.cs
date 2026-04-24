@@ -1,6 +1,6 @@
-﻿using eComm.SharedLib.Responses;
+﻿using eCommerce.SharedLibrary.Responses;
 using System.Linq.Expressions;
-namespace eComm.SharedLib.Interface
+namespace eCommerce.SharedLibrary.Interface
 {
     public interface IGenericInterface<T> where T : class
     {

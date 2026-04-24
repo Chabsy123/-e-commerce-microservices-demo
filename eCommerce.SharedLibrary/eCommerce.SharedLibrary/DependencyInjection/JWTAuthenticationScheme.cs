@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace eComm.SharedLib.DependencyInjection
+namespace eCommerce.SharedLibrary.DependencyInjection
 {
     public static class JWTAuthenticationScheme
     {
