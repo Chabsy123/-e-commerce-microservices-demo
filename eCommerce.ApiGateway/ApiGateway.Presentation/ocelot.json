@@ -17,7 +17,8 @@
         "EnableRateLimiting": true,
         "Period": "60s",
         "Limit": 1,
-        "PeriodTimespan": 10
+        "PeriodTimespan": 10,
+        "QuotaExceededMessage": "Overwhelming requests detected. Calm down boss."
       }
     },
 
@@ -60,7 +61,7 @@
       }
     },
 
-    // PRODUCT  => POST, PUT, DELETE -> All
+    // PRODUCT => POST, PUT, DELETE -> All
     {
       "DownstreamPathTemplate": "/api/products/{everything}",
       "DownstreamScheme": "http",
@@ -92,13 +93,9 @@
       "UpstreamPathTemplate": "/api/orders",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
-        "TtlSeconds": 60,
+        "TtlSeconds": 20,
         "Region": "default",
         "Header": "eCommerce-Caching-Control"
-      },
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
       }
     },
 
@@ -118,21 +115,17 @@
         "TtlSeconds": 60,
         "Region": "default",
         "Header": "eCommerce-Caching-Control"
-      },
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
       }
     },
 
-    // ORDER  => POST, PUT, DELETE -> All
+    // ORDER => POST, PUT, DELETE -> All
     {
       "DownstreamPathTemplate": "/api/orders/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5002  
+          "Port": 5002
         }
       ],
       "UpstreamPathTemplate": "/api/orders/{everything}",
@@ -144,10 +137,6 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:5003",
-    "RateLimitOptions": {
-      "QuotaExceededMessage": "Overwhelming requests detected. Calm down boss."
-    }
+    "BaseUrl": "http://localhost:5003"
   }
 }
-

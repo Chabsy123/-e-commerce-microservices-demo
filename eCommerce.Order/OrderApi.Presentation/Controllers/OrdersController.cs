@@ -1,5 +1,4 @@
-﻿using Azure;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OrderApi.Application.DTOs;
 using OrderApi.Application.DTOs.Conversions;
@@ -11,11 +10,13 @@ namespace OrderApi.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class OrdersController(IOrder orderInterface, IOrderService orderService) : ControllerBase
     {
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OrderDTO>>> GetOrders()
         {
+            await Task.Delay(4000); // Simulate async operation
             var orders = await orderInterface.GetAllAsync();
             if (!orders.Any())
                 return NotFound("No orders found in the database.");

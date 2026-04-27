@@ -38,11 +38,11 @@ namespace eCommerce.SharedLibrary.DependencyInjection
             app.UseMiddleware<GlobalException>();
 
             // Register middleware to all outs
-            //app.UseMiddleware<ListenToOnlyApiGateway>();
+            app.UseMiddleware<ListenToOnlyApiGateway>();
 
 
             return app;
         }
     }
 
-    }
+}
