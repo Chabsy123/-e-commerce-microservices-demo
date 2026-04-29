@@ -10,10 +10,11 @@ namespace ProductApi.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [AllowAnonymous]
+    
     public class ProductsController(IProduct productInterface) : ControllerBase
     {
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<ProductDTO>>> GetProducts()
         {
             //get all product from repo
