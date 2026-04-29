@@ -1,6 +1,5 @@
 ﻿using eCommerce.SharedLibrary.Responses;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ProductApi.Application.DTOs;
 using ProductApi.Application.DTOs.Conversions;
@@ -47,7 +46,7 @@ namespace ProductApi.Presentation.Controllers
         {
             //check model state if all data annotations are passed
             if (!ModelState.IsValid)
-                return BadRequest("Invalid data");
+                return BadRequest(ModelState);
 
             //convert to entity
             var getEntity  = ProductConversion.ToEntity(product);

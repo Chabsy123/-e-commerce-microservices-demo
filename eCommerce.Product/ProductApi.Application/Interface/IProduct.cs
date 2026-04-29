@@ -5,7 +5,7 @@ namespace ProductApi.Application.Interface
 {
     public interface IProduct : IGenericInterface<Product> 
     {
-        
+        //object UpdateAsync(global::UnitTest.ProductApi ignored);
     }
  
 }
