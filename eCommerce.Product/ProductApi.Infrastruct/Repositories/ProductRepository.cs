@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace ProductApi.Infrastruct.Repositories
 {
-    internal class ProductRepository(ProductDbContext context) : IProduct
+    public class ProductRepository(ProductDbContext context) : IProduct
     {
         public async Task<Response> CreateAsync(Product entity)
         {
@@ -23,7 +23,7 @@ namespace ProductApi.Infrastruct.Repositories
 
                 await context.SaveChangesAsync();
                  if (currentEntity is not null && currentEntity.Id > 0)
-                    return new Response(true, $"{entity.Name} added successfully");
+                    return new Response(true, $"{entity.Name} added to database successfully");
                 else
                     return new Response(false, $"Error occurred while loading {entity.Name}.");
 

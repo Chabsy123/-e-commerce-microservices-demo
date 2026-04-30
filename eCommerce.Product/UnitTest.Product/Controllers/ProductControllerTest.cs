@@ -159,10 +159,73 @@ namespace UnitTest.ProductApi.Controllers
         }
 
         [Fact]
-        public async Task DeleteProduct_WhenDeleteSuccessful_ReturnOkResponse()
+        public async Task UpdateProduct_WhenUpdateFails_ReturnBadRequestResponse()
         {
-            var productDTO = new ProductDTO(1, "Product 1", 34, 67.95m);
+            //Arrange
+            var productDTO = new ProductDTO(1, "Product 1", 78, 45.36m);
+            var response = new Response(false, "Update Failed");
+
+            //Act
+            A.CallTo(() => productInterface.UpdateAsync(A<ProductModel>.Ignored)).Returns(response);
+            var result = await productsController.UpdateProduct(productDTO);
+
+            //Assert
+            var badRequestResult = result.Result as BadRequestObjectResult;
+            badRequestResult.Should().NotBeNull();
+            badRequestResult!.StatusCode.Should().Be(StatusCodes.Status400BadRequest);
+
+            var responseResult = badRequestResult.Value as Response;
+            responseResult.Should().NotBeNull();
+            responseResult!.Message.Should().Be("Update Failed");
+            responseResult!.Flag.Should().BeFalse();
+        }
+
+        [Fact]
+        public async Task DeleteProduct_WhenDeleteIsSuccessful_ReturnOkResponse()
+        {
+            //Arrange
+            var productDTO = new ProductDTO(1, "Product 1", 78, 45.36m);
             var response = new Response(true, "Deleted Successfully");
+
+            //set up fake response for DeleteAsync
+            A.CallTo(() => productInterface.DeleteAsync(A<ProductModel>.Ignored)).Returns(response);
+
+            //Act
+            var result = await productsController.DeleteProduct(productDTO);
+
+            //Assert
+            var okResult = result.Result as OkObjectResult;
+            okResult.Should().NotBeNull();
+            okResult!.StatusCode.Should().Be(StatusCodes.Status200OK);
+
+            var responseResult = okResult.Value as Response;
+            responseResult!.Message.Should().Be("Deleted Successfully");
+            responseResult!.Flag.Should().BeTrue();
+        }
+
+        [Fact]
+        public async Task DeleteProduct_WhenDeleteFails_ReturnBadRequestResponse()
+        {
+            //Arrange
+            var productDTO = new ProductDTO(1, "Product 1", 78, 67.95m);
+            var response = new Response(false, "Delete Failed");
+
+            //set up fake response for DeleteAsync
+            A.CallTo(() => productInterface.DeleteAsync(A<ProductModel>.Ignored)).Returns(response);
+
+            //Act
+            var result = await productsController.DeleteProduct(productDTO);
+
+            //Assert
+            var badRequestResult = result.Result as BadRequestObjectResult;
+            badRequestResult.Should().NotBeNull();
+            badRequestResult!.StatusCode.Should().Be(StatusCodes.Status400BadRequest);
+
+            var responseResult = badRequestResult.Value as Response;
+            responseResult.Should().NotBeNull();
+            responseResult!.Message.Should().Be("Delete Failed");
+            responseResult!.Flag.Should().BeFalse();
         }
     }
 }
+    
