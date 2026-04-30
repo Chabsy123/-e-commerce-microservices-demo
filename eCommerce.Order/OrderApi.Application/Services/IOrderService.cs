@@ -1,9 +1,4 @@
 ﻿using OrderApi.Application.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OrderApi.Application.Services
 {
@@ -11,6 +6,9 @@ namespace OrderApi.Application.Services
     {
         Task<IEnumerable<OrderDTO>> GetOrdersByClientId(int clientId);
         Task<OrderDetailsDTO> GetOrderDetails(int orderId);
+
+        Task<AppUserDTO> GetUser(int userId);
+        Task<ProductDTO> GetProduct(int productId);
         
     }
 }

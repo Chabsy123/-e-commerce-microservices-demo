@@ -12,7 +12,10 @@ namespace OrderApi.Application.Services
         //Get product
         public async Task<ProductDTO> GetProduct(int productId)
         {
-            var getProduct = await httpClient.GetAsync($"http://localhost:5001/api/products/{productId}");
+            //call product api using http client
+            //redirect this call to the api gateway since product api is not responding to outsiders
+            var getProduct = await httpClient.GetAsync($"/api/products/{productId}");
+
             // return null on failure
             if (!getProduct.IsSuccessStatusCode)
                 return null!;
